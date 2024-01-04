@@ -78,3 +78,5 @@ function createTodoDiv(todo){
 
   return itemDiv;
 }
+
+showLists();

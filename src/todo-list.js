@@ -1,7 +1,7 @@
 import {compareAsc, addWeeks} from "date-fns";
 
-const soonList = [];
-const futureList = [];
+let futureList = JSON.parse(localStorage.getItem("futureList")) || [];
+let soonList = JSON.parse(localStorage.getItem("soonList")) || [];
 
 function addItem(todo){
     const monthAhead = addWeeks(new Date(), 4);
@@ -10,6 +10,10 @@ function addItem(todo){
     }else{
         soonList.push(todo);
     }
+
+    // Save to local storage
+    localStorage.setItem("futureList", JSON.stringify(futureList));
+    localStorage.setItem("soonList", JSON.stringify(soonList));
 };
 
 function removeItem(todo){
@@ -21,6 +25,10 @@ function removeItem(todo){
     if (indexFuture > -1) {
         futureList.splice(indexFuture, 1);
     }
+
+    // Save to local storage
+    localStorage.setItem("futureList", JSON.stringify(futureList));
+    localStorage.setItem("soonList", JSON.stringify(soonList));
 }
 
 export {soonList, futureList, addItem, removeItem};
