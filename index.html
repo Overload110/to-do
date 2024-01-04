@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <script src="main.js" type="module" defer></script>
+</head>
+<body>
+    <div class="header">
+        <button id="addTask">New Task</button>
+    <dialog id="todoForm">
+        <form>
+            <div class="input">
+                <label for="title">To Do: </label>
+                <input id="title" type="text">
+            </div>
+            <div class="input">
+                <label for="desc">Description:</label>
+                <input id="desc" type="text">
+            </div>
+            <div class="input">
+                <label for="dueDate">When:</label>
+                <input id="dueDate" type="number">
+            </div>
+            <div class="input">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="mid">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            <div class="input">
+                <button id="cancel" value="cancel" ty>Cancel</button>
+                <button id="submit" type="submit">Add</button>
+            </div>
+        </form>
+    </dialog>
+    </div>
+    <div class="lists">
+        <div id="short-term"></div>
+        <div id="long-term"></div>
+    </div>
+</body>
+</html>
