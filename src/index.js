@@ -6,29 +6,38 @@ const shortTerm = document.getElementById('short-term');
 const longTerm = document.getElementById('long-term');
 const addButton = document.getElementById('addTask');
 const closeButton = document.getElementById('cancel');
-const dialog = document.getElementById('todoForm');
+const submitButton = document.getElementById('submit');
+const dialog = document.getElementById('todoDiag');
 
 addButton.addEventListener('click', () => {
     dialog.showModal();
   });
 
-  closeButton.addEventListener('click', () => {
-    dialog.close();
-  });
+closeButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  const form = document.getElementById("todoForm");
 
-document.getElementById("todoForm").addEventListener("submit", function(e) {
+  form.reset();
+  dialog.close();
+});
+
+dialog.addEventListener("submit", function(e) {
   e.preventDefault();
   const title = document.getElementById("title").value;
   const desc = document.getElementById("desc").value;
   const due = document.getElementById("dueDate").value;
   console.log(due);
   const priority = document.getElementById("priority").value;
+  const form = document.getElementById("todoForm");
+  console.log(!isNaN(new Date(due)));
+  if(!isNaN(new Date(due))){
+    let newTodo = new Todo(title, desc, due, priority);
+    addItem(newTodo);
+    showLists();
 
-  let newTodo = new Todo(title, desc, due, priority);
-  addItem(newTodo);
-  showLists();
-
-  dialog.close(); // Close the dialog after adding a task
+    form.reset()
+    dialog.close(); // Close the dialog after adding a task
+  }
 });
 
 function showLists(){
