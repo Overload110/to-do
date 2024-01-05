@@ -1,0 +1,72 @@
+@font-face {
+    font-family: deku;
+    src: url(Dekko-Regular.ttf);
+  }
+
+body{
+    background-color: darkgray;
+    text-align: center;
+    font-family: 'deku', sans-serif;
+}
+
+.header{
+    margin-bottom: 20px;
+}
+.header>button{
+    width: 100px;
+    height: 30px;
+    background-color: mintcream;
+    border: none;
+}
+
+.lists{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+}
+
+.done{
+    background-color: lightgrey;
+}
+
+.todo{
+    border: none;
+    border-radius: 10px;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.todo>button{
+    height: 2em;
+    border: none;
+    border-radius: 1em;
+}
+
+h4, p{
+    text-wrap: pretty;
+}
+
+h2{
+    width: 200px;
+}
+
+.high{
+    background-color: crimson;
+}
+
+.mid{
+    background-color: orange;
+}
+
+.low{
+    background-color: forestgreen;
+}
+
+#short-term, #long-term{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

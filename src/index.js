@@ -89,17 +89,23 @@ function createTodoDiv(todo){
   doneLabel.innerHTML = 'Done: '
   doneBox.addEventListener('change', function() {
     todo.done = this.checked;
+    if(todo.done){
+      itemDiv.classList.remove(todo.priority);
+      itemDiv.classList.add('done');
+    }else{
+      itemDiv.classList.add(todo.priority);
+      itemDiv.classList.remove('done');
+    }
     localStorage.setItem("futureList", JSON.stringify(futureList));
     localStorage.setItem("soonList", JSON.stringify(soonList));
   });
 
-
+  itemDiv.appendChild(doneLabel);
+  itemDiv.appendChild(doneBox);
   itemDiv.appendChild(task);
   itemDiv.appendChild(description);
   itemDiv.appendChild(dateDue);
   itemDiv.appendChild(priority);
-  itemDiv.appendChild(doneLabel);
-  itemDiv.appendChild(doneBox);
   itemDiv.appendChild(remove);
 
   return itemDiv;
