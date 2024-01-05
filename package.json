@@ -1,5 +1,10 @@
 {
   "dependencies": {
     "date-fns": "^3.0.6"
+  },
+  "devDependencies": {
+    "css-loader": "^6.8.1",
+    "style-loader": "^3.3.3",
+    "webpack-cli": "^5.1.4"
   }
 }
