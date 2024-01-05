@@ -1,6 +1,7 @@
 import {format } from 'date-fns';
 import {soonList, futureList, addItem, removeItem} from "./todo-list";
 import { Todo } from './todo-item';
+import './style.css';
 
 const shortTerm = document.getElementById('short-term');
 const longTerm = document.getElementById('long-term');
@@ -81,7 +82,7 @@ function createTodoDiv(todo){
 
   const doneBox = document.createElement('input');
   doneBox.type = "checkbox";
-  doneBox.id = "doneBox";
+  doneBox.id = "doneBox" + itemDiv.id;
   doneBox.checked = todo.done;
   const doneLabel = document.createElement('label');
   doneLabel.setAttribute('for', doneBox.id);
