@@ -5,7 +5,7 @@ let soonList = JSON.parse(localStorage.getItem("soonList")) || [];
 
 function addItem(todo){
     const monthAhead = addWeeks(new Date(), 4);
-    if(compareAsc(todo.dueDate, monthAhead) <= 0){
+    if(compareAsc(todo.dueDate, monthAhead) >= 0){
         futureList.push(todo);
     }else{
         soonList.push(todo);
