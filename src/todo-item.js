@@ -1,5 +1,11 @@
 export class Todo{
-    static idCounter = 0;
+    static get idCounter() {
+        return parseInt(localStorage.getItem('idCounter')) || 0;
+    }
+
+    static set idCounter(value) {
+        localStorage.setItem('idCounter', value);
+    }
 
     constructor(title, desc, due, priority){
         this.id = ++Todo.idCounter;
