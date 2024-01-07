@@ -12,6 +12,11 @@ body{
 #todoDiag{
     border: none;
     border-radius: 15px;
+    padding: 0px;
+}
+
+#todoForm{
+    padding: 20px;
 }
 
 .header{

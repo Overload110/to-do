@@ -22,6 +22,11 @@ closeButton.addEventListener('click', (e) => {
   dialog.close();
 });
 
+dialog.addEventListener('click', function(e) {
+  if (e.target === dialog) {
+    dialog.close();
+  }
+});
 
 dialog.addEventListener("submit", function(e) {
   e.preventDefault();
