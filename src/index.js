@@ -1,5 +1,5 @@
 import {format } from 'date-fns';
-import {getItemsByDate, addItem, removeItem} from "./todo-list";
+import {getItemsByDate, addItem, removeItem, save} from "./todo-list";
 import { Todo } from './todo-item';
 import './style.css';
 import * as datedreamer from 'datedreamer';
@@ -12,14 +12,6 @@ const dialog = document.getElementById('todoDiag');
 
 addButton.addEventListener('click', () => {
     dialog.showModal();
-  });
-
-document.addEventListener('click', function(event) {
-  let isInside = dialog.contains(event.target);
-
-  if (!isInside && dialog.open) {
-    dialog.close();
-  }
 });
 
 closeButton.addEventListener('click', (e) => {
@@ -29,6 +21,7 @@ closeButton.addEventListener('click', (e) => {
   form.reset();
   dialog.close();
 });
+
 
 dialog.addEventListener("submit", function(e) {
   e.preventDefault();
@@ -59,7 +52,12 @@ function showLists(date){
 
 function createTodoDiv(todo){
   const itemDiv = document.createElement('div');
-    itemDiv.classList.add('todo', todo.priority);
+    itemDiv.classList.add('todo');
+    if(!todo.done){
+      itemDiv.classList.add(todo.priority);
+    }else{
+      itemDiv.classList.add('done');
+    }
     itemDiv.id = todo.id;
 
   const task = document.createElement('h4');
@@ -101,8 +99,7 @@ function createTodoDiv(todo){
       itemDiv.classList.add(todo.priority);
       itemDiv.classList.remove('done');
     }
-    localStorage.setItem("futureList", JSON.stringify(futureList));
-    localStorage.setItem("soonList", JSON.stringify(soonList));
+    save();
   });
 
   itemDiv.appendChild(doneLabel);

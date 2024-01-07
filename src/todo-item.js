@@ -16,8 +16,4 @@ export class Todo{
         this.done = false;
     }
 
-    toggleDone(){
-        this.done = !done;
-    }
-
 }
