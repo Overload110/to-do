@@ -9,6 +9,11 @@ body{
     font-family: 'deku', sans-serif;
 }
 
+#todoDiag{
+    border: none;
+    border-radius: 15px;
+}
+
 .header{
     margin-bottom: 20px;
 }
@@ -19,12 +24,6 @@ body{
     border: none;
 }
 
-.lists{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-items: center;
-}
-
 .done{
     background-color: lightgrey;
 }
@@ -32,11 +31,12 @@ body{
 .todo{
     border: none;
     border-radius: 10px;
-    width: 40vw;
+    width: 80vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
+    box-shadow: 3px 3px 4px 1px black;
 }
 
 .todo>button{
@@ -65,8 +65,9 @@ h2{
     background-color: forestgreen;
 }
 
-#short-term, #long-term{
+#list, body{
     display: flex;
     flex-direction: column;
     gap: 15px;
+    align-items: center;
 }

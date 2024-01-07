@@ -1,34 +1,24 @@
-import {compareAsc, addWeeks} from "date-fns";
+import {compareAsc, format} from "date-fns";
 
-let futureList = JSON.parse(localStorage.getItem("futureList")) || [];
-let soonList = JSON.parse(localStorage.getItem("soonList")) || [];
+let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
 
 function addItem(todo){
-    const monthAhead = addWeeks(new Date(), 4);
-    if(compareAsc(todo.dueDate, monthAhead) >= 0){
-        futureList.push(todo);
-    }else{
-        soonList.push(todo);
-    }
+    todoList.push(todo);
 
-    // Save to local storage
-    localStorage.setItem("futureList", JSON.stringify(futureList));
-    localStorage.setItem("soonList", JSON.stringify(soonList));
+    localStorage.setItem("todoList", JSON.stringify(todoList));
 };
 
 function removeItem(todo){
-    const indexSoon = soonList.indexOf(todo);
-    if (indexSoon > -1) {
-        soonList.splice(indexSoon, 1);
+    const indexTodo = todoList.indexOf(todo);
+    if (indexTodo > -1) {
+        todoList.splice(indexTodo, 1);
     }
-    const indexFuture = futureList.indexOf(todo);
-    if (indexFuture > -1) {
-        futureList.splice(indexFuture, 1);
-    }
+    
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+};
 
-    // Save to local storage
-    localStorage.setItem("futureList", JSON.stringify(futureList));
-    localStorage.setItem("soonList", JSON.stringify(soonList));
+function getItemsByDate(date) {
+    return todoList.filter(todo => todo.dueDate === format(date, 'yyyy-MM-dd'));
 }
 
-export {soonList, futureList, addItem, removeItem};
+export {getItemsByDate, addItem, removeItem};

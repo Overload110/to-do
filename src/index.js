@@ -1,10 +1,10 @@
 import {format } from 'date-fns';
-import {soonList, futureList, addItem, removeItem} from "./todo-list";
+import {getItemsByDate, addItem, removeItem} from "./todo-list";
 import { Todo } from './todo-item';
 import './style.css';
+import * as datedreamer from 'datedreamer';
 
-const shortTerm = document.getElementById('short-term');
-const longTerm = document.getElementById('long-term');
+const listDiv = document.getElementById('list');
 const addButton = document.getElementById('addTask');
 const closeButton = document.getElementById('cancel');
 const submitButton = document.getElementById('submit');
@@ -13,6 +13,14 @@ const dialog = document.getElementById('todoDiag');
 addButton.addEventListener('click', () => {
     dialog.showModal();
   });
+
+document.addEventListener('click', function(event) {
+  let isInside = dialog.contains(event.target);
+
+  if (!isInside && dialog.open) {
+    dialog.close();
+  }
+});
 
 closeButton.addEventListener('click', (e) => {
   e.preventDefault();
@@ -34,21 +42,18 @@ dialog.addEventListener("submit", function(e) {
   if(!isNaN(new Date(due))){
     let newTodo = new Todo(title, desc, due, priority);
     addItem(newTodo);
-    showLists();
 
     form.reset()
     dialog.close(); // Close the dialog after adding a task
   }
 });
 
-function showLists(){
-  shortTerm.innerHTML = '';
-  longTerm.innerHTML = '';
-  soonList.forEach((element) => {
-    shortTerm.appendChild(createTodoDiv(element));
-  });
-  futureList.forEach((element) => {
-    longTerm.appendChild(createTodoDiv(element));
+function showLists(date){
+  listDiv.innerHTML = '';
+  const dateList = getItemsByDate(date);
+  console.log(dateList);
+  dateList.forEach((element) => {
+    listDiv.appendChild(createTodoDiv(element));
   });
 }
 
@@ -66,7 +71,7 @@ function createTodoDiv(todo){
   description.innerHTML = todo.desc;
 
   const dateDue = document.createElement('p');
-  dateDue.innerHTML = `Due: ${format(todo.dueDate, 'MMM dd, yyyy')}`;
+  dateDue.innerHTML = `Due: ${format(new Date(todo.dueDate.replace(/-/g, '/')), 'MMM dd, yyyy')}`;
   dateDue.classList.add('dueDate');
 
   const priority = document.createElement('p');
@@ -110,5 +115,16 @@ function createTodoDiv(todo){
 
   return itemDiv;
 }
-
-showLists();
+new datedreamer.calendar({
+  element: "#calendar",
+  theme: 'lite-purple',
+  onChange: (e) => {
+    console.log(format(e.detail, 'MMddyyyy'));
+    showLists(e.detail);
+  },
+  onRender: (e) => {
+    console.log(e.detail.calendar);
+    showLists(new Date());
+  }
+})
+//change to one list, filter the list and show based on calendar day clicked.
